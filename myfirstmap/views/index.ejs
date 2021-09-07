@@ -23,6 +23,14 @@ var mapOptions = {
 };
 
 var map = new naver.maps.Map('map', mapOptions);
+
+maker = new naver.maps.Marker({
+    map:map, 
+    position : new naver.maps.LatLng(37.3595704, 127.105399),
+    icon : {
+        content: "<div class='marker'></div>"
+    }
+})
 </script>
 </body>
 </html>
