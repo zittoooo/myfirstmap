@@ -3,6 +3,19 @@ body {
   margin: 0px !important;
   /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
 }
+
+#navbar {
+  height: 100px;
+  width: 100%;
+  background: #262626;
+  color:white;
+  font-weight:bolder;
+  font-size:25px;
+  display:flex; /*안하면 뒤에 center이 하나도 안된다 */
+  align-items:center; /* 세로 기준 center */
+  justify-content: center; /* 가로 기준 center */
+
+}
 /* 
 a {
   color: #00B7FF;
