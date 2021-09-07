@@ -11,7 +11,7 @@ body {
   color:white;
   font-weight:bolder;
   font-size:25px;
-  display:flex; /*안하면 뒤에 center이 하나도 안된다 */
+  display:flex; /* 안하면 뒤에 center이 하나도 안된다 */
   align-items:center; /* 세로 기준 center */
   justify-content: center; /* 가로 기준 center */
 }
@@ -32,4 +32,3 @@ body {
   font-size: 15px;
   font-weight:bolder;
 }
-
