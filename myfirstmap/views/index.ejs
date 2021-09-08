@@ -24,6 +24,9 @@ var mapOptions = {
 
 var map = new naver.maps.Map('map', mapOptions);
 
+var markerList = [];
+var infowindowList = [];
+
 for (var i in data){
     var target = data[i];
     var latlng = new naver.maps.LatLng(target.lat, target.lng);
@@ -31,11 +34,26 @@ for (var i in data){
         map:map, 
         position:latlng, 
         icon : {
-            content: "<div class='marker'></div>"
+            content: "<div class='marker'></div>", 
+            anchor : "new naver.maps.Point(12,12)"
         }
+    });
+
+    var content = `<div class='infowindow_wrap'>
+    <div class='infowindow_title'>${target.title}</div>
+    <div class='infowindow_content'>${target.content}</div>
+    <div class='infowindow_date'>${target.date}</div>
+    </div>`;
+
+    var infoWindow = new naver.maps.InfoWindow({
+        content: content, 
+        backgroundColor: '#00ff0000', 
+        borderColor : '#00ff0000', 
+        anchorSize: new naver.maps.Size(0,0)
     });
 }
 
 </script>
+
 </body>
 </html>
