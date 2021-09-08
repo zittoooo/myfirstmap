@@ -51,6 +51,25 @@ for (var i in data){
         borderColor : '#00ff0000', 
         anchorSize: new naver.maps.Size(0,0)
     });
+
+    markerList.push(marker);
+    infowindowList.push(infoWindow);
+}
+
+for (var i = 0, ii=markerList.length; i < ii; i++){
+    naver.maps.Event.addListener(markerList[i], "click", getClickHandler(i));
+}
+
+function getClickHandler(i) {
+    return function () {
+        var marker = markerList[i]; 
+        var infowindow = infowindowList[i];
+        if (infowindow.getMap()) {
+            infowindow.close();
+        } else {
+            infowindow.open(map, marker);
+        }
+    }
 }
 
 </script>
