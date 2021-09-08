@@ -57,7 +57,15 @@ for (var i in data){
 }
 
 for (var i = 0, ii=markerList.length; i < ii; i++){
+    naver.maps.Event.addListener(map, "click", ClickMap(i)); /* 순서가 뒤면 아예 적용 안됨;; */
     naver.maps.Event.addListener(markerList[i], "click", getClickHandler(i));
+}
+
+function ClickMap(i) {
+    return function() {
+        var infowindow = infowindowList[i];
+        infowindow.close();
+    }
 }
 
 function getClickHandler(i) {
