@@ -10,11 +10,17 @@
 </head>
 <body>
     <div id="navbar">myfirstmap</div>
-    <div id="infoBox">
-        <div id="infoTitle">현재날짜</div>
-        <div id="infoContent">2020.10.07</div>
+    <div id="container"> 
+        <div id="box-left"></div>
+        <div id="box-center"></div>
+        <div id="box-right">
+            <div id="infoBox">
+                <div id="infoTitle">현재날짜</div>
+                <div id="infoContent">2020.10.07</div>
+            </div>
+            <div id="map" style="width:100%;height:100vh;"></div>
+        </div>
     </div>
-    <div id="map" style="width:100%;height:100vh;"></div>
 <script type="text/javascript" src="/data/data.js"></script>
 <script>
 var mapOptions = {

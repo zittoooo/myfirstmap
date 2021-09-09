@@ -4,6 +4,25 @@ body {
   /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
 }
 
+#container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 5fr;
+}
+
+#box-left {
+  background:yellow;
+  text-align: center;
+}
+
+#box-center {
+  background:powderblue;
+
+}
+
+#box-right {
+
+}
+
 #navbar {
   height: 50px;
   width: 100%;
@@ -21,7 +40,7 @@ body {
   z-index:10000;
   top:100px;
   background: white;
-  left:20px;
+  right:20px;
   padding:15px;
   border: 1px solid rgba(0,0,0,0.2);
   border-radius: 4px;
