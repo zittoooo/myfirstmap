@@ -10,13 +10,12 @@ body {
 }
 
 #box-left {
-  background:yellow;
+  background:#d9a0af;
   text-align: center;
 }
 
 #box-center {
-  background:powderblue;
-
+  background: rgb(224, 230, 250);
 }
 
 #box-right {
