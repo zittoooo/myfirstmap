@@ -130,7 +130,6 @@
 // }
 
 
-
 var mapOptions = {
     center: new naver.maps.LatLng(37.3595704, 127.105399),
     zoom: 9
@@ -144,26 +143,27 @@ let listEl = document.getElementById('placesList');
 
 
 for (var i in data){
-    var target = data[i];
-    var latlng = new naver.maps.LatLng(target.lat, target.lng);
-    marker = new naver.maps.Marker({
+    const target = data[i];
+    const latlng = new naver.maps.LatLng(target.lat, target.lng);
+    
+    let marker = new naver.maps.Marker({
         map: map, 
         position: latlng, 
-        icon : {
-            content: "<div class='marker'></div>", 
-            anchor : "new naver.maps.Point(12,12)"
+        icon: {
+            content: `<div class='marker'></div>`,
+            anchor : new naver.maps.Point(6.5, 6.5)  // 중심좌표 설정, 마커 높이-넓이/2
         }
     });
 
-    var content = `<div class='infowindow_wrap'>
+    const content = `<div class='infowindow_wrap'>
     <div class='infowindow_title'>${target.company}</div>
     <div class='infowindow_content'>${target.address}</div>
     <div class='infowindow_date'>${target.date}</div>
     </div>`;
 
-    var infoWindow = new naver.maps.InfoWindow({
+    const infoWindow = new naver.maps.InfoWindow({
         content: content, 
-        backgroundColor: '#00ff0000', 
+        backgroundColor: '#00ff0000', // css로 설정할예정, 현재 투명
         borderColor : '#00ff0000', 
         anchorSize: new naver.maps.Size(0,0)
     });
@@ -186,29 +186,56 @@ for (var i in data){
         listEl.appendChild(el);
 }
 
-for (var i = 0, ii=markerList.length; i < ii; i++){
-    naver.maps.Event.addListener(map, "click", ClickMap(i)); /* 순서가 뒤면 아예 적용 안됨;; */
+/*
+마커를 클릭했을 때 인포윈도가 열려 있으면 닫고
+윈포윈도가 닫혀있으면 마커위에 인포윈도를 열어주는 함수
+*/
+const getClickHandler = (i) => () => {
+    const marker = markerList[i];
+    const infowindow = infowindowList[i];
+
+    if (infowindow.getMap()) {
+        infowindow.close();
+    } else {
+        infowindow.open(map, marker);
+    }
+};
+// function getClickHandler(i) {
+//     return function () {
+//         var marker = markerList[i]; 
+//         var infowindow = infowindowList[i];
+//         if (infowindow.getMap()) {
+//             infowindow.close();
+//         } else {
+//             infowindow.open(map, marker);
+//         }
+//     }
+// }
+
+/*
+지도를 클릭했을 때 윈포윈도 닫기 
+*/
+const getClickMap = (i) => () => {
+    const infowindow = infowindowList[i];
+    infowindow.close();
+};
+// function getClickMap(i) {
+//     return function() {
+//         var infowindow = infowindowList[i];
+//         infowindow.close();
+//     }
+// }
+
+for (var i = 0; i < markerList.length; i++) {
+    naver.maps.Event.addListener(map, "click", getClickMap(i)); /* 순서가 뒤면 아예 적용 안됨;; */
     naver.maps.Event.addListener(markerList[i], "click", getClickHandler(i));
 }
 
-function ClickMap(i) {
-    return function() {
-        var infowindow = infowindowList[i];
-        infowindow.close();
-    }
-}
 
-function getClickHandler(i) {
-    return function () {
-        var marker = markerList[i]; 
-        var infowindow = infowindowList[i];
-        if (infowindow.getMap()) {
-            infowindow.close();
-        } else {
-            infowindow.open(map, marker);
-        }
-    }
-}
+
+
+
+
 
 
 

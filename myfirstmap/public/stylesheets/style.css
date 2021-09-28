@@ -27,8 +27,10 @@ body {
 }
 
 #navbar {
+  /* position: fixed; */
   height: 50px;
   width: 100%;
+  z-index: 1000;
   background: #262626;
   color:white;
   font-weight:bolder;
@@ -56,16 +58,16 @@ body {
 }
 
 .marker {
-  border:1px solid black;
-  background : green;
-  opacity : 0.8;
   width: 12px;
   height: 12px;
+  background : green;
+  border:1px solid black;
+  opacity : 0.8;
   border-radius : 50%;
 }
 
 .infowindow_wrap {
-  background : white;
+  background : rgba(255,255,255, 0.8);
   padding : 20px;
   border : 1px solid rgba(0,0,0,0.2);
 }

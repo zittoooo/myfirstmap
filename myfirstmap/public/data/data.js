@@ -1,4 +1,4 @@
-var data = [
+const data = [
 	{
 	  company : "남산", 
 	  address: "서울 남산", 
