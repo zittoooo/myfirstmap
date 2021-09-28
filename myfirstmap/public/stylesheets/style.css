@@ -14,8 +14,8 @@ body {
   text-align: center;
 }
 
-#box-center {
-  background: rgb(244, 238, 237);
+#menu-wrap {
+  /* background: rgb(244, 238, 237); */
 }
 
 #box-right {
@@ -59,8 +59,8 @@ body {
   border:1px solid black;
   background : green;
   opacity : 0.8;
-  width: 24px;
-  height: 24px;
+  width: 12px;
+  height: 12px;
   border-radius : 50%;
 }
 
@@ -83,4 +83,52 @@ body {
 .infowindow_date {
   font-size : 13px;
   font-weight : normal;
+}
+
+#menu_wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 200px;
+  margin: 50px 0 30px 10px;
+  padding: 5px;
+  overflow-y: auto;
+  background: rgba(255,255,255, 0.7);
+  z-index: 1;
+  font-size: 12px;
+  border-radius: 10px;
+}
+
+#menu_wrap hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 2px solid #5f5f5f;
+  margin: 3px 0;
+
+}
+
+#placesList .item {
+  position: relative;
+  border-bottom: 7px solid #888;
+  overflow: hidden;
+  cursor: pointer;
+  width: 100%;
+}
+
+#placesList .item span {
+  display: block;
+  margin-top: 8px;
+}
+
+#palcesList .item .info {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 20px;
+}
+
+#placesList .item .info_title {
+  font-weight: bolder;
 }
