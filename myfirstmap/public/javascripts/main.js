@@ -192,7 +192,7 @@ for (var i in data){
         list.push(el);
 
         el.onclick = function() {
-            displayInfowindow(marker, target.company, target.address, target.lat, target.lng, infoWindow)
+            displayInfowindow(marker, infoWindow)
         };
 }
 
@@ -214,7 +214,6 @@ const getClickHandler = (i) => () => {
     const marker = markerList[i];
     const infowindow = infowindowList[i];
 
-
     if (infowindow.getMap()) {
         infowindow.close();
     } else {
@@ -222,13 +221,7 @@ const getClickHandler = (i) => () => {
     }
 };
 
-function displayInfowindow(marker, company, address, lat, lng, infowindow) {
-    let content = `
-        <div style="padding:25px;">
-            ${company}<br>
-            ${address}<br>
-        </div>
-        `;
+function displayInfowindow(marker, infowindow) {
 
     map.panTo(marker.getPosition());
     infowindow.open(map, marker);
