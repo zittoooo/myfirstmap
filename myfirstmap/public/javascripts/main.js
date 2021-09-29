@@ -192,7 +192,7 @@ for (var i in data){
         list.push(el);
 
         el.onclick = function() {
-            displayInfowindow(marker, target.company, target.address, target.lat, target.lng)
+            displayInfowindow(marker, target.company, target.address, target.lat, target.lng, infoWindow)
         };
 }
 
@@ -202,6 +202,7 @@ for (var i in data){
 */
 const getClickMap = (i) => () => {
     const infowindow = infowindowList[i];
+    
     infowindow.close();
 };
 
@@ -221,7 +222,7 @@ const getClickHandler = (i) => () => {
     }
 };
 
-function displayInfowindow(marker, company, address, lat, lng) {
+function displayInfowindow(marker, company, address, lat, lng, infowindow) {
     let content = `
         <div style="padding:25px;">
             ${company}<br>
@@ -230,12 +231,6 @@ function displayInfowindow(marker, company, address, lat, lng) {
         `;
 
     map.panTo(marker.getPosition());
-    const infowindow = new naver.maps.InfoWindow({
-        content: content,
-        backgroundColor: 'rgba(255, 255, 255, 0.9)',
-        borderColor: '#00ff0000',
-        anchorSize: new naver.maps.Size(0, 0)
-    });
     infowindow.open(map, marker);
 }
 
