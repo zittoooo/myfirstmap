@@ -137,10 +137,14 @@ var mapOptions = {
 
 var map = new naver.maps.Map('map', mapOptions);
 
+let infowindow = new daum.maps.InfoWindow({
+    zIndex: 1,
+});
+
 var markerList = [];
 var infowindowList = [];
+var list = [];
 let listEl = document.getElementById('placesList');
-
 
 for (var i in data){
     const target = data[i];
@@ -183,8 +187,23 @@ for (var i in data){
 
         el.innerHTML = itemStr;
         el.className = "item";
+        
         listEl.appendChild(el);
+        list.push(el);
+
+        el.onclick = function() {
+            displayInfowindow(marker, target.company, target.address, target.lat, target.lng)
+        };
 }
+
+
+/*
+지도를 클릭했을 때 윈포윈도 닫기 
+*/
+const getClickMap = (i) => () => {
+    const infowindow = infowindowList[i];
+    infowindow.close();
+};
 
 /*
 마커를 클릭했을 때 인포윈도가 열려 있으면 닫고
@@ -194,41 +213,36 @@ const getClickHandler = (i) => () => {
     const marker = markerList[i];
     const infowindow = infowindowList[i];
 
+
     if (infowindow.getMap()) {
         infowindow.close();
     } else {
         infowindow.open(map, marker);
     }
 };
-// function getClickHandler(i) {
-//     return function () {
-//         var marker = markerList[i]; 
-//         var infowindow = infowindowList[i];
-//         if (infowindow.getMap()) {
-//             infowindow.close();
-//         } else {
-//             infowindow.open(map, marker);
-//         }
-//     }
-// }
 
-/*
-지도를 클릭했을 때 윈포윈도 닫기 
-*/
-const getClickMap = (i) => () => {
-    const infowindow = infowindowList[i];
-    infowindow.close();
-};
-// function getClickMap(i) {
-//     return function() {
-//         var infowindow = infowindowList[i];
-//         infowindow.close();
-//     }
-// }
+function displayInfowindow(marker, company, address, lat, lng) {
+    let content = `
+        <div style="padding:25px;">
+            ${company}<br>
+            ${address}<br>
+        </div>
+        `;
+
+    map.panTo(marker.getPosition());
+    const infowindow = new naver.maps.InfoWindow({
+        content: content,
+        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        borderColor: '#00ff0000',
+        anchorSize: new naver.maps.Size(0, 0)
+    });
+    infowindow.open(map, marker);
+}
 
 for (var i = 0; i < markerList.length; i++) {
     naver.maps.Event.addListener(map, "click", getClickMap(i)); /* 순서가 뒤면 아예 적용 안됨;; */
     naver.maps.Event.addListener(markerList[i], "click", getClickHandler(i));
+    naver.maps.Event.addListener(list[i], "click", getClickHandler(i));
 }
 
 
