@@ -8,6 +8,20 @@ var app = require('../app');
 var debug = require('debug')('myfirstmap:server');
 var http = require('http');
 
+const userConfig = require('../config/userConfig.json')
+const mongoose = require('mongoose');
+
+let db = mongoose.connection;
+db.on('error', console.error);
+db.once('open', ()=> {
+  console.log('Connected to mongo Server');
+})
+
+mongoose.connect(
+  `mongodb+srv://jiholee:${userConfig.PW}@workmap.ufcri.mongodb.net/workmap?retryWrites=true&w=majority`,
+  { useNewUrlParser:true, useUnifiedTopology: true }
+)
+
 /**
  * Get port from environment and store in Express.
  */
